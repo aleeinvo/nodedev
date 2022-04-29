@@ -1,16 +1,21 @@
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
-let file = path.join(__dirname, 'data.jsons');
+let file = path.join(__dirname, 'data.json');
+let log = path.join(__dirname, 'log.txt');
 
-if(fs.existsSync(file)) {
-    fs.readFile(file, 'utf-8', (err, content) => {
+fs.writeFile(log, '[' + (new Date()).toISOString() + '] ' + JSON.stringify({
+    name: 'Ali Dhillon',
+    username: 'aleedhillon',
+    city: 'Lahore'
+}) + os.EOL, {
+    flag: 'a+'
+}, error => {
+    if(error) {
+        console.log(error.message);
+        return;
+    }
 
-        if(err) {
-            console.error(err.message);
-            return;
-        }
-    
-        console.log(content);
-    })
-}
+    console.log('file has been written successfully');
+});
