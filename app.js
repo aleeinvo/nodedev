@@ -1,29 +1,14 @@
+const fs = require('fs');
+const path = require('path');
 
-const axios = require('axios');
-const https = require('https');
+let file = path.join(__dirname, 'data.json');
 
-async function fetchData() {
-    let response = await axios
-        .get('https://jsonplaceholder.typicode.com/users/1');
+fs.stat(file, (error, stats) => {
+    if(error) {
+        console.error(error);
+    }
 
-    console.log(response.status, response.data);
-}
-
-function fetchDataNatively() {
-    const request = https.request({
-        hostname: 'jsonplaceholder.typicode.com',
-        port: 443,
-        path: '/users/1',
-        method: 'GET'
-    }, response => {
-        response.on('data', data => {
-            process.stdout.write(data);
-        })
-    });
-
-    request.on('error', console.error);
-
-    request.end();
-}
-
-fetchDataNatively();
+    console.log(stats.isFile());
+    console.log(stats.isDirectory());
+    console.log(stats.size);
+})
