@@ -3,12 +3,8 @@ const path = require('path');
 
 let file = path.join(__dirname, 'data.json');
 
-fs.stat(file, (error, stats) => {
-    if(error) {
-        console.error(error);
-    }
+console.log(path.basename(file, path.extname(file)));
 
-    console.log(stats.isFile());
-    console.log(stats.isDirectory());
-    console.log(stats.size);
-})
+console.log(path.resolve('some', '.'));
+
+console.log(path.normalize('./../../express-app/app.js'));
