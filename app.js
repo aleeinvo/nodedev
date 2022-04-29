@@ -1,10 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 
-let file = path.join(__dirname, 'data.json');
+let file = path.join(__dirname, 'data.jsons');
 
-console.log(path.basename(file, path.extname(file)));
+if(fs.existsSync(file)) {
+    fs.readFile(file, 'utf-8', (err, content) => {
 
-console.log(path.resolve('some', '.'));
-
-console.log(path.normalize('./../../express-app/app.js'));
+        if(err) {
+            console.error(err.message);
+            return;
+        }
+    
+        console.log(content);
+    })
+}
