@@ -1,27 +1,11 @@
-const os = require('os');
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
 
-console.log(os.arch());
+const server = http.createServer((request, response) => {
+    const stream = fs.createReadStream(path.join(__dirname, 'data.json'));
 
-console.log(os.cpus());
+    stream.pipe(response);
+});
 
-console.log(os.homedir());
-
-console.log(os.hostname());
-
-console.log(os.loadavg());
-
-console.log(os.networkInterfaces());
-
-console.log(os.platform());
-
-console.log(os.release());
-
-console.log(os.tmpdir());
-
-console.log(os.totalmem()/ 1024 / 1024 / 1024);
-
-console.log(os.type());
-
-console.log(os.uptime());
-
-console.log(os.userInfo());
+server.listen(3000);
