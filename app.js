@@ -1,11 +1,9 @@
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
+process.on('uncaughtException', e => {
+    console.log(e.message);
+})
 
-const server = http.createServer((request, response) => {
-    const stream = fs.createReadStream(path.join(__dirname, 'data.json'));
 
-    stream.pipe(response);
-});
 
-server.listen(3000);
+throw new Error('Sample errror');
+
+console.log('This is after the rrror');
